@@ -13,7 +13,7 @@ It's hard to come up with unique blocks! By the end of each block it's often imp
 1. **Download program** to folder of your choice
 2. Open `build_quilt.rb` and **change the following variables**:
     * **@needed_rows**: Input how many rows _long_ the quilt should be
-    * **@needed_columns**: Input how many columns _wide_ the quilt should be. At this time the program can handle up to **two** blocks wide. So if your unique square size is 8x8 you can have up to 16 columns. 
+    * **@needed_columns**: Input how many columns _wide_ the quilt should be. At this time the program can handle up to **two** blocks wide. So if your unique square size is 8x8 you can have up to 16 columns. It's an easy fix to make it wider, I just didn't need to do that.
     * **colors**: Input how many different colors you are using
     * **@square_size**: Input how big each unique square should be. (For example "8" would be 8 rows by 8 columns where each color is in each row and column only once. I like to have one more color than the square size, so 9 colors and blocks of 8x8. This really adds to the randomness of the quilt.) _Note: this can NOT be bigger than the amount of colors you have! It would be impossible to have a row of 9 when you are only using 6 colors!_
 3. Navigate to `quilt_program` folder in terminal and **run `ruby build_quilt.rb`**
