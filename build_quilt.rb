@@ -1,3 +1,5 @@
+require 'erb'
+
 class BuildQuilt
 
 	def initialize
