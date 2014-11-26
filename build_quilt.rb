@@ -1,13 +1,30 @@
 class BuildQuilt
 
 	def initialize
-		@needed_rows = 24
+
+		############ EDIT THESE ############
+		# How many rows long should the quilt be?
+		@needed_rows = 16
+		# How many columns wide should the quilt be?
 		@needed_columns = 16
-		@all_colors = [0,1,2,3,4,5,6,7,8]
-		# At this point the program only works with 8x8 squares, so this variable shouldn't be changed
+		# How many colors are there?
+		colors = 8
+		# How big should each unique square be?
 		@square_size = 8
+		############ STOP EDITING ############
+
+		@all_colors = []
+		# Turns colors variable into an array of numbers
+		build_colors(colors)
 		@all_options = @all_colors.permutation(@square_size).to_a
+		# Starts building quilt
 		build_quilt
+	end
+
+	def build_colors(colors)
+		0.upto(colors - 1) do |num|
+			@all_colors << num
+		end
 	end
 
 	def build_quilt
