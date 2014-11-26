@@ -4,13 +4,13 @@ class BuildQuilt
 
 		############ EDIT THESE ############
 		# How many rows long should the quilt be?
-		@needed_rows = 16
+		@needed_rows = 18
 		# How many columns wide should the quilt be?
-		@needed_columns = 16
+		@needed_columns = 18
 		# How many colors are there?
-		colors = 8
+		colors = 9
 		# How big should each unique square be?
-		@square_size = 8
+		@square_size = 9
 		############ STOP EDITING ############
 
 		@all_colors = []
@@ -28,9 +28,12 @@ class BuildQuilt
 	end
 
 	def build_quilt
+		# Output variables used
 		puts "\nBuilding quilt..."
+		puts "\n-----------------------------------------"
 		puts "Dimensions: #{@needed_columns} columns by #{@needed_rows} rows"
 		puts "Using squares of #{@square_size} by #{@square_size} with #{@all_colors.length} colors"
+		puts "-----------------------------------------"
 		puts "\nBuilding left side..."
 		print "Quilt row: "
 		@quilt_board = []
@@ -43,11 +46,11 @@ class BuildQuilt
 				@quilt_board.pop
 				tries += 1
 				if tries % 3 == 0
-					if @quilt_board.length < 8
+					if @quilt_board.length < @square_size
 						@quilt_board = []
 					else
-						how_many_full_blocks = @quilt_board.length / 8
-						(@quilt_board.length - (how_many_full_blocks * 8)).times { @quilt_board.pop }
+						how_many_full_blocks = @quilt_board.length / @square_size
+						(@quilt_board.length - (how_many_full_blocks * @square_size)).times { @quilt_board.pop }
 					end
 				end
 			else
@@ -77,11 +80,11 @@ class BuildQuilt
 				@quilt_board_right.pop
 				tries += 1
 				if tries % 3 == 0
-					if block_length < 8
+					if block_length < @square_size
 						@quilt_board_right = []
 					else
-						how_many_full_blocks = @quilt_board_right.length / 8
-						(@quilt_board_right.length - (how_many_full_blocks * 8)).times { @quilt_board_right.pop }
+						how_many_full_blocks = @quilt_board_right.length / @square_size
+						(@quilt_board_right.length - (how_many_full_blocks * @square_size)).times { @quilt_board_right.pop }
 					end
 				end
 			else
@@ -114,7 +117,7 @@ class BuildQuilt
 		@quilt_board.each_with_index do |row, i|
 			print "#{row} "
 			print "#{@quilt_board_right[i]}" if @quilt_board_right != nil
-			puts if (i + 1) % 8 == 0
+			puts if (i + 1) % @square_size == 0
 			puts
 			row.each do |square|
 				stats[square] += 1
@@ -126,6 +129,7 @@ class BuildQuilt
 	def display_stats(stats)
 		stats_arr = stats.sort_by { |color, amount| amount }
 		stats_arr = stats_arr.sort { |x, y| [y[1], x[0]] <=> [x[1], y[0]] }
+		puts
 		stats_arr.each do |row|
 			puts "Color #{row[0]}: #{row[1]}"
 		end
@@ -145,20 +149,20 @@ class BuildQuilt
 	def get_list_of_column_numbers(quilt_board)
 		columns = Hash.new
 		num_rows = quilt_board.length
-		if num_rows.between?(1, 7)
+		if num_rows.between?(1, (@square_size - 1))
 			quilt_board.each do |board_row|
 				board_row.each_with_index do |num, num_index|
 					columns[num_index] ||= []
 					columns[num_index] << num
 				end
 			end
-		elsif num_rows != 0 && num_rows % 8 == 0
+		elsif num_rows != 0 && num_rows % @square_size == 0
 			quilt_board[-1].each_with_index do |num, num_index|
 				columns[num_index] ||= []
 				columns[num_index] << num
 			end
 		elsif num_rows != 0
-			rows_to_check = (num_rows % 8)
+			rows_to_check = (num_rows % @square_size)
 			1.upto(rows_to_check) do |x|
 				quilt_board[-x].each_with_index do |num, num_index|
 					columns[num_index] ||= []

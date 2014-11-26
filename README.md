@@ -10,13 +10,14 @@ It's hard to come up with unique blocks! By the end of each block it's often imp
 
 ## Instructions
 
-1. Download program to folder of your choice
-2. Open `build_quilt.rb` and change the following variables:
-- **@needed_rows**: Input how many rows _long_ the quilt should be
-- **@needed_columns**: Input how many columns _wide_ the quilt should be
-- **colors**: Input how many different colors you are using
-- **@square_size**: Input how big each unique square should be. _Note: this can NOT be bigger than the amount of colors you have!_
-3. Navigate to `quilt_program` folder in terminal and run `ruby build_quilt.rb`
-- Program will build the quilt with the specified variables and spit out in the terminal window the final combination, along with the amount of squares used for each color. This will help you decide which color to assign to each number. Say color 3 has the most squares and color 6 has the fewest. Maybe you want more orange and less blue - simply assign orange to color 3 and blue to color 6!
+1. **Download program** to folder of your choice
+2. Open `build_quilt.rb` and **change the following variables**:
+    * **@needed_rows**: Input how many rows _long_ the quilt should be
+    * **@needed_columns**: Input how many columns _wide_ the quilt should be. At this time the program can handle up to **two** blocks wide. So if your unique square size is 8x8 you can have up to 16 columns. 
+    * **colors**: Input how many different colors you are using
+    * **@square_size**: Input how big each unique square should be. (For example "8" would be 8 rows by 8 columns where each color is in each row and column only once. I like to have one more color than the square size, so 9 colors and blocks of 8x8. This really adds to the randomness of the quilt.) _Note: this can NOT be bigger than the amount of colors you have! It would be impossible to have a row of 9 when you are only using 6 colors!_
+3. Navigate to `quilt_program` folder in terminal and **run `ruby build_quilt.rb`**
+    * Program will build the quilt with the specified variables and spit out in the terminal window the final combination, along with the amount of squares used for each color. This will help you decide which color to assign to each number. Say color 3 has the most squares and color 6 has the fewest. Maybe you want more orange and less blue - simply assign orange to color 3 and blue to color 6!
+    * The program is very fast, but depending on your variables (maybe you're building squares of 8x8 and using 8 colors and you have 16 rows by 24 columns) this might take up to 30 seconds or so, so the program will tell you as it goes which row it is on so you're not watching a blank screen wondering if it's working. First it goes down the left side, then the right side, outputting which row it is building. Fun to watch! Or maybe I'm just a nerd. 
 
 ## Examples 
