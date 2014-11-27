@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link href="../css/style.css" rel="stylesheet" >
+  <meta charset="utf-8" >
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon" >
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" >
+	<title>Quilt Display</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<h1>Your quilt!</h1>
+			<h2>Dimensions: <%= @needed_columns %> columns by <%= @needed_rows %> rows</h2>
+			<h2>Using squares of <%= @square_size %>x<%= @square_size %> with <%= @colors %> colors</h2>
+			<h2>Total squares: <%= @needed_columns * @needed_rows %> </h2>
+			<h2>File name: <%= @filename %></h2>
+		</div>
+		<div id="content">
+			<div class="quilt">
+				<table>
+					<% @quilt_board.each_with_index do |row, i| %>
+						<tr>
+							<% row.each do |square| %>
+								<%= "<td class='color#{square}'>#{square}</td>" %>
+							<% end %>
+							<% if @quilt_board_right != nil %>
+								<% @quilt_board_right[i].each do |square| %>
+									<%= "<td class='color#{square}'>#{square}</td>" %>
+								<% end %>
+							<% end %>
+						</tr>
+					<% end %>
+				</table>
+			</div>
+			<div class="stats">
+				<h1><strong>Stats</strong></h1>
+				<p><% @stats_arr.each do |row| %>
+					<%= "Color #{row[0]}: #{row[1]}<br/>" %>
+				<% end %></p>
+			</div>
+			<div class="instructions">
+				<h1><strong>Instructions:</strong></h1>
+				<p><strong>CSS:</strong> Open css file and find "#content .quilt table td.color0". Start changing the hex codes for the colors until you have each square the color you want. </p>
+				<p><strong>SASS:</strong> Open Scout and turn it on for this file. At the top of style.scss under "Define colors" start changing the color variables until you have each square the color you want.</p>
+				<p><strong>Square height:</strong> If you want the squares to be perfectly square go into the css and change the table td padding until they are square. </p>
+			</div>
+		</div>
+		<div id="footer">
+			<ul><li>Program built by <a href="http://katemcfaul.com">katemcfaul.com</a></li></ul>
+		</div>
+	</div>
+</body>
+</html>

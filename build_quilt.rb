@@ -6,25 +6,25 @@ class BuildQuilt
 
 		############ EDIT THESE ############
 		# How many rows long should the quilt be?
-		@needed_rows = 8
+		@needed_rows = 20
 		# How many columns wide should the quilt be?
-		@needed_columns = 8
+		@needed_columns = 16
 		# How many colors are there?
-		colors = 9
+		@colors = 9
 		# How big should each unique square be?
 		@square_size = 8
 		############ STOP EDITING ############
 
 		@all_colors = []
 		# Turns colors variable into an array of numbers
-		build_colors(colors)
+		build_colors
 		@all_options = @all_colors.permutation(@square_size).to_a
 		# Starts building quilt
 		build_quilt
 	end
 
-	def build_colors(colors)
-		0.upto(colors - 1) do |num|
+	def build_colors
+		0.upto(@colors - 1) do |num|
 			@all_colors << num
 		end
 	end
@@ -163,11 +163,11 @@ class BuildQuilt
 	# Display the stats for each color
 	def display_stats(stats)
 		# Put the stats info into an array to sort
-		stats_arr = stats
+		@stats_arr = stats
 		# Sort the array first by the amount of color used descending (first index) and then by the color name ascending (zeroth index)
-		stats_arr = stats_arr.sort { |x, y| [y[1], x[0]] <=> [x[1], y[0]] }
+		@stats_arr = @stats_arr.sort { |x, y| [y[1], x[0]] <=> [x[1], y[0]] }
 		puts
-		stats_arr.each do |row|
+		@stats_arr.each do |row|
 			puts "Color #{row[0]}: #{row[1]}"
 		end
 	end
@@ -265,7 +265,28 @@ class BuildQuilt
 
 	# Build the html page for the quilt
 	def build_index
-		
+
+		# Names the file based on date and time for uniqueness and ability to find which one you want later
+		t = Time.now
+		@file_time = t.strftime("%Y.%b.%d_%H.%M.%S")
+		@filename = "quilt_pages/#{@needed_rows}x#{@needed_columns}_#{@file_time}.html"
+
+		# Store the quilt page template in a variable
+		quilt_template = File.read "templates/quilt_template.erb"
+		# Start a new ERB
+		erb_template = ERB.new quilt_template
+		# Pull it all together and put info into one variable
+		quilt_page = erb_template.result(binding)
+
+		# Makes the directory for the quilt pages if there isn't one
+		Dir.mkdir("quilt_pages") unless Dir.exists? "quilt_pages"
+
+		# Opens the file and saves (actually writes) the quilt info
+		File.open(@filename, 'w') do |file|
+			file.puts quilt_page
+		end
+
+		system("open #{@filename}")
 	end
 end
 
