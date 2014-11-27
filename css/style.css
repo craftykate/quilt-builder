@@ -157,82 +157,85 @@ body {
   background-color: white;
   width: 59%;
   text-align: center;
-  background-color: pink;
   margin-left: 20.5%;
 }
-/* line 237, ../sass/style.scss */
+/* line 235, ../sass/style.scss */
 #content .quilt table {
   width: 100%;
 }
-/* line 239, ../sass/style.scss */
+/* line 237, ../sass/style.scss */
 #content .quilt table td {
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
-/* line 242, ../sass/style.scss */
+/* line 240, ../sass/style.scss */
 #content .quilt table td.color0 {
   background-color: #bf450e;
   color: #8f340b;
 }
-/* line 246, ../sass/style.scss */
+/* line 244, ../sass/style.scss */
 #content .quilt table td.color1 {
   background-color: #571f48;
   color: #311229;
 }
-/* line 250, ../sass/style.scss */
+/* line 248, ../sass/style.scss */
 #content .quilt table td.color2 {
   background-color: #aa5b12;
   color: #7c420d;
 }
-/* line 254, ../sass/style.scss */
+/* line 252, ../sass/style.scss */
 #content .quilt table td.color3 {
   background-color: #ffc923;
   color: #efb400;
 }
-/* line 258, ../sass/style.scss */
+/* line 256, ../sass/style.scss */
 #content .quilt table td.color4 {
   background-color: #1f645b;
   color: #133d38;
 }
-/* line 262, ../sass/style.scss */
+/* line 260, ../sass/style.scss */
 #content .quilt table td.color5 {
   background-color: #60456a;
   color: #44314b;
 }
-/* line 266, ../sass/style.scss */
+/* line 264, ../sass/style.scss */
 #content .quilt table td.color6 {
   background-color: #14b570;
   color: #0f8754;
 }
-/* line 270, ../sass/style.scss */
+/* line 268, ../sass/style.scss */
 #content .quilt table td.color7 {
   background-color: #becb37;
   color: #9aa42b;
 }
-/* line 274, ../sass/style.scss */
+/* line 272, ../sass/style.scss */
 #content .quilt table td.color8 {
   background-color: #708428;
   color: #4f5d1c;
 }
-/* line 281, ../sass/style.scss */
+/* line 276, ../sass/style.scss */
+#content .quilt table td.white {
+  background-color: white;
+}
+/* line 282, ../sass/style.scss */
 #content .stats {
   width: 13%;
   float: left;
   padding: 0 10px;
   margin-left: 20px;
 }
-/* line 286, ../sass/style.scss */
+/* line 287, ../sass/style.scss */
 #content .stats h1 {
   font-size: 1.3em;
   margin-bottom: 10px;
   color: #60456a;
 }
-/* line 291, ../sass/style.scss */
+/* line 292, ../sass/style.scss */
 #content .stats p {
   color: #14b570;
   line-height: 1.4em;
 }
-/* line 296, ../sass/style.scss */
+/* line 297, ../sass/style.scss */
 #content .instructions {
   width: 59%;
   margin: 0 auto;
@@ -240,38 +243,38 @@ body {
   padding: 10px;
   clear: both;
 }
-/* line 302, ../sass/style.scss */
+/* line 303, ../sass/style.scss */
 #content .instructions h1 {
   font-size: 1.3em;
   margin-bottom: 10px;
   color: #becb37;
 }
-/* line 307, ../sass/style.scss */
+/* line 308, ../sass/style.scss */
 #content .instructions p {
   color: #708428;
   line-height: 1.3em;
   margin-bottom: 1.2em;
 }
 
-/* line 317, ../sass/style.scss */
+/* line 318, ../sass/style.scss */
 #footer {
   padding: 10px;
   clear: both;
 }
-/* line 320, ../sass/style.scss */
+/* line 321, ../sass/style.scss */
 #footer ul {
   text-align: center;
 }
-/* line 323, ../sass/style.scss */
+/* line 324, ../sass/style.scss */
 #footer li {
   display: inline;
   color: #aa5b12;
 }
-/* line 327, ../sass/style.scss */
+/* line 328, ../sass/style.scss */
 #footer a, #footer a:visited {
   color: #bf450e;
 }
-/* line 329, ../sass/style.scss */
+/* line 330, ../sass/style.scss */
 #footer a:hover, #footer a:focus, #footer a:active, #footer a:visited:hover, #footer a:visited:focus, #footer a:visited:active {
   color: #571f48;
 }

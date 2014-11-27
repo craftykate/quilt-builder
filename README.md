@@ -28,4 +28,6 @@ It's hard to come up with unique blocks! By the end of each block it's often imp
 
 Here is what the final html page looks like after you have run the program. So pretty! And makes it easy to see if you will like the combination of colors. 
 
+Hover over a square in the quilt to see just that color to make sure you like the distribution of each color!
+
 ![Quilt Output](img/quilt.png)

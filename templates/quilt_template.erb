@@ -6,6 +6,9 @@
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon" >
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" >
 	<title>Quilt Display</title>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../scripts.js"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -28,11 +31,11 @@
 					<% @quilt_board.each_with_index do |row, i| %>
 						<tr>
 							<% row.each do |square| %>
-								<%= "<td class='color#{square}'>#{square}</td>" %>
+								<%= "<td class='colors color#{square}'>#{square}</td>" %>
 							<% end %>
 							<% if @quilt_board_right != nil %>
 								<% @quilt_board_right[i].each do |square| %>
-									<%= "<td class='color#{square}'>#{square}</td>" %>
+									<%= "<td class='colors color#{square}'>#{square}</td>" %>
 								<% end %>
 							<% end %>
 						</tr>

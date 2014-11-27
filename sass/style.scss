@@ -231,14 +231,12 @@
 			background-color: white;
 			width: 59%;
 			text-align: center;
-			// margin: 0 auto;
-			background-color: pink;
 			margin-left: 20.5%;
 			table {
 				width: 100%;
 				td {
-					padding-top: 6px;
-					padding-bottom: 6px;
+					padding-top: 7px;
+					padding-bottom: 7px;
 					&.color0 {
 						background-color: $color0;
 						color: darken($color0, 10%);
@@ -274,6 +272,9 @@
 					&.color8 {
 						background-color: $color8;
 						color: darken($color8, 10%);
+					}
+					&.white {
+						background-color: white;
 					}
 				}
 			}
