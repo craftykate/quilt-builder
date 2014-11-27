@@ -17,6 +17,12 @@
 			<h2>File name: <%= @filename %></h2>
 		</div>
 		<div id="content">
+			<div class="stats">
+				<h1><strong>Stats</strong></h1>
+				<p><% @stats_arr.each do |row| %>
+					<%= "Color #{row[0]}: #{row[1]}<br/>" %>
+				<% end %></p>
+			</div>
 			<div class="quilt">
 				<table>
 					<% @quilt_board.each_with_index do |row, i| %>
@@ -32,12 +38,6 @@
 						</tr>
 					<% end %>
 				</table>
-			</div>
-			<div class="stats">
-				<h1><strong>Stats</strong></h1>
-				<p><% @stats_arr.each do |row| %>
-					<%= "Color #{row[0]}: #{row[1]}<br/>" %>
-				<% end %></p>
 			</div>
 			<div class="instructions">
 				<h1><strong>Instructions:</strong></h1>
