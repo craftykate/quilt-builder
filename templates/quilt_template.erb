@@ -38,6 +38,11 @@
 									<%= "<td class='colors color#{square}'>#{square}</td>" %>
 								<% end %>
 							<% end %>
+							<% if @quilt_board_far_right != nil %>
+								<% @quilt_board_far_right[i].each do |square| %>
+									<%= "<td class='colors color#{square}'>#{square}</td>" %>
+								<% end %>
+							<% end %>
 						</tr>
 					<% end %>
 				</table>

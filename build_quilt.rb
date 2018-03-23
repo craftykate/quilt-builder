@@ -6,13 +6,13 @@ class BuildQuilt
 
 		############ EDIT THESE ############
 		# How many rows long should the quilt be?
-		@needed_rows = 20
+		@needed_rows = 6
 		# How many columns wide should the quilt be?
-		@needed_columns = 16
+		@needed_columns = 18
 		# How many colors are there?
 		@colors = 9
 		# How big should each unique square be?
-		@square_size = 8
+		@square_size = 9
 		############ STOP EDITING ############
 
 		@all_colors = []
@@ -74,6 +74,10 @@ class BuildQuilt
 		if @needed_columns > @square_size
 			build_right
 		end
+		# If the quilt is wider than two blocks, build the far right side
+		if @needed_columns > @square_size * 2
+			build_far_right
+		end
 		# Show the quilt
 		show_quilt
 		# Build html page for the quilt
@@ -92,8 +96,14 @@ class BuildQuilt
 			block_length = @quilt_board_right.length
 			# Break loop when done
 			break if block_length == @needed_rows
+			# Calculate how wide block should be
+			if @needed_columns - @square_size <= @square_size
+				width = @needed_columns - @square_size
+			else
+				width = @square_size
+			end
 			# Get next potential row
-			potential_row, @quilt_board_right, opt_length = get_row(@quilt_board_right, (@needed_columns - @square_size))
+			potential_row, @quilt_board_right, opt_length = get_row(@quilt_board_right, width)
 			# If there are no options left...
 			if potential_row == false
 				# Delete the last two rows and start again
@@ -139,6 +149,65 @@ class BuildQuilt
 		end
 	end
 
+	# Build the right side
+	def build_far_right
+ 		puts "\n\nBuilding far right side..."
+ 		print "Quilt row: "
+		@quilt_board_far_right = []
+		tries = 0
+		check_options = nil
+		# Continue loop until all rows have been made
+		loop do 
+			block_length = @quilt_board_far_right.length
+			# Break loop when done
+			break if block_length == @needed_rows
+			# Get next potential row
+			potential_row, @quilt_board_far_right, opt_length = get_row(@quilt_board_far_right, (@needed_columns - (@square_size * 2)))
+			# If there are no options left...
+			if potential_row == false
+				# Delete the last two rows and start again
+				@quilt_board_far_right.pop
+				@quilt_board_far_right.pop
+				tries += 1
+				# If this has been tried a few times start the square over
+				if tries % 3 == 0
+					if block_length < @square_size
+						@quilt_board_far_right = []
+					else
+						# Only delete the current square, not the whole thing
+						how_many_full_blocks = @quilt_board_far_right.length / @square_size
+						(@quilt_board_far_right.length - (how_many_full_blocks * @square_size)).times { @quilt_board_far_right.pop }
+					end
+				end
+			else
+				# The current row satisfies the current block, not the left side of the quilt, so check that here. Make sure left edge of the row doesn't match the right edge of the left side.
+				# This is for the top row
+				if block_length == 0 && potential_row[0] != @quilt_board_right[0][-1] && potential_row[0] != @quilt_board_right[1][-1]
+					@quilt_board_far_right << potential_row
+					print "#{@quilt_board_far_right.length} "
+				# This is for the middle rows
+				elsif block_length.between?(1, (@needed_rows - 2)) && potential_row[0] != @quilt_board_right[block_length - 1][-1] && potential_row[0] != @quilt_board_right[block_length][-1] && potential_row[0] != @quilt_board_right[block_length + 1][-1]
+					@quilt_board_far_right << potential_row
+					print "#{@quilt_board_far_right.length} "
+				# This is for the last row
+				elsif block_length == (@needed_rows - 1) && potential_row[0] != @quilt_board_right[-2][-1] && potential_row[0] != @quilt_board_right[-1][-1]
+					@quilt_board_far_right << potential_row
+					print "#{@quilt_board_far_right.length} "
+				else
+					# Sometimes the right side block gets stuck and comes up with the same options (say, 3) over and over. The block itself still has options, but none that satisfy the left side of the quilt. If it does this 10 times delete the last two rows of the block.
+					if check_options == opt_length
+						tries += 1
+						if tries % 10 == 0
+							@quilt_board_far_right.pop
+							@quilt_board_far_right.pop
+						end
+					end
+					check_options = opt_length
+				end
+			end
+		end
+	end
+
 	# Display the final quilt, while storing the stats as it goes through
 	def show_quilt
 		stats = Hash.new(0)
@@ -147,13 +216,25 @@ class BuildQuilt
 		@quilt_board.each_with_index do |row, i|
 			print "#{row} "
 			# Display the right side of the quilt if it exists
-			print "#{@quilt_board_right[i]}" if @quilt_board_right != nil
+			print "#{@quilt_board_right[i]} " if @quilt_board_right != nil
+			# Display the right side of the quilt if it exists
+			print "#{@quilt_board_far_right[i]}" if @quilt_board_far_right != nil
 			# If it has reached the end of a unique block put an empty line
 			puts if (i + 1) % @square_size == 0
 			puts
 			# Add 1 to the count of that color to the stats hash
 			row.each do |square|
 				stats[square] += 1
+			end
+			if @quilt_board_right != nil
+				@quilt_board_right[i].each do |square|
+					stats[square] += 1
+				end
+			end
+			if @quilt_board_far_right != nil
+				@quilt_board_far_right[i].each do |square|
+					stats[square] += 1
+				end
 			end
 		end
 		# Show the stats
